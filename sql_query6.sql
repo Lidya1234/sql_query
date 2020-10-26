@@ -11,3 +11,7 @@ select count(name) from world where area >= 1000000
 select sum(population) from world where name IN ('Estonia', 'Latvia', 'Lithuania')
 --For each continent show the continent and number of countries.
 select continent,count(name) from world GROUP BY continent
+--For each continent show the continent and number of countries with populations of at least 10 million.
+select continent,count(name) from world where population >= 10000000 GROUP BY CONTINENT
+--List the continents that have a total population of at least 100 million.
+select continent from world  GROUP BY CONTINENT HAVING SUM(population) >= 100000000 
