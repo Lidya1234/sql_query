@@ -1,0 +1,31 @@
+--List each country name where the population is larger than that of 'Russia'.
+SELECT name FROM world
+  WHERE population >
+     (SELECT population FROM world
+      WHERE name='Russia')
+--Show the countries in Europe with a per capita GDP greater than 'United Kingdom'.
+select name from world where continent ='Europe' AND gdp/population > (select gdp/population from world where name='United Kingdom' )
+--List the name and continent of countries in the continents containing either Argentina or Australia. Order by name of the country. 
+select name,continent from world where continent =(select continent from world where name='Argentina') OR continent =(select continent from world where name='Australia') ORDER BY name
+--Which country has a population that is more than Canada but less than Poland? Show the name and the population.
+select name, population from world where population > (select population from world where name='Canada')AND population < (select population from world where name='Poland')
+--Show the name and the population of each country in Europe. Show the population as a percentage of the population of Germany.
+select name, CONCAT(ROUND(100*population/(select population from world where name='Germany')),'%')from world where continent='Europe'
+--Which countries have a GDP greater than every country in Europe?
+select name from world where gdp >ALL(SELECT gdp from world where continent='Europe' and gdp>0)
+--Find the largest country (by area) in each continent, show the continent, the name and the area:
+SELECT continent, name, area FROM world x
+  WHERE area >= ALL
+    (SELECT area FROM world y
+        WHERE y.continent=x.continent
+          AND area>0)
+--List each continent and the name of the country that comes first alphabetically.
+select continent ,name from world x where name <= ALL(select name from world y where x.continent = y.continent)         
+
+SELECT name ,population FROM  world WHERE polulation BETWEEN 1,000,000 AND 1,250,000;
+SELECT name ,population FROM world WHERE name LIKE 'Al%';
+SELECT name FROM world WHERE name LIKE '%a' name LIKE '%l';
+SELECT name ,length(name) FROM world WHERE length(name)=5 and region='EUROPE';
+SELECT name ,area*2 FROM world WHERE population=64000;
+SELECT name ,area,population FROM world WHERE area >5000 and population < 10,000,000;
+SELECT name ,population/area FROM world WHERE name IN ('china',)
