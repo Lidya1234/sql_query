@@ -22,10 +22,3 @@ SELECT continent, name, area FROM world x
 --List each continent and the name of the country that comes first alphabetically.
 select continent ,name from world x where name <= ALL(select name from world y where x.continent = y.continent)         
 
-SELECT name ,population FROM  world WHERE polulation BETWEEN 1,000,000 AND 1,250,000;
-SELECT name ,population FROM world WHERE name LIKE 'Al%';
-SELECT name FROM world WHERE name LIKE '%a' name LIKE '%l';
-SELECT name ,length(name) FROM world WHERE length(name)=5 and region='EUROPE';
-SELECT name ,area*2 FROM world WHERE population=64000;
-SELECT name ,area,population FROM world WHERE area >5000 and population < 10,000,000;
-SELECT name ,population/area FROM world WHERE name IN ('china',)
