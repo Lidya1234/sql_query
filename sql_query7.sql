@@ -17,3 +17,11 @@ SELECT player, teamid, coach, gtime
 select mdate,teamname from game JOIN eteam ON (team1 = eteam.id) where coach='Fernando Santos'
 --List the player for every goal scored in a game where the stadium was 'National Stadium, Warsaw'
 select player from goal JOIN game ON (id=matchid) where stadium='National Stadium, Warsaw'
+--Show the name of all players who scored a goal against Germany.
+select DISTINCT player from game JOIN goal ON id=matchid where teamid!='GER' AND (team1='GER' OR team2='GER')
+--Show teamname and the total number of goals scored.
+SELECT teamname, COUNT(gtime)
+  FROM eteam JOIN goal ON id=teamid
+ GROUP BY teamname
+--Show the stadium and the number of goals scored in each stadium.
+select stadium ,count(gtime) from game JOIN goal ON matchid=id GROUP BY stadium 
